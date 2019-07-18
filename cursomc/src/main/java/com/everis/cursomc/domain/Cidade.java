@@ -19,7 +19,7 @@ public class Cidade implements Serializable {
 	private String Nome;
 	
 	@ManyToOne
-	@JoinColumn(name="ESTADO_ID")
+	@JoinColumn(name="estado_id")
 	private Estado estado;
 	
 	public Integer getId() {
@@ -37,10 +37,14 @@ public class Cidade implements Serializable {
 	public Cidade() {
 		
 	}
-	public Cidade(Integer id, String nome,Estado estado) {
+	
+	
+	
+	public Cidade(Integer id, String nome, Estado estado) {
 		super();
 		this.id = id;
 		Nome = nome;
+		this.estado = estado;
 	}
 	@Override
 	public int hashCode() {

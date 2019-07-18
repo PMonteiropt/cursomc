@@ -12,6 +12,8 @@ import com.everis.cursomc.domain.Cidade;
 import com.everis.cursomc.domain.Estado;
 import com.everis.cursomc.domain.Produto;
 import com.everis.cursomc.repositories.CategoriaRepository;
+import com.everis.cursomc.repositories.CidadeRepository;
+import com.everis.cursomc.repositories.EstadoRepository;
 import com.everis.cursomc.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -23,8 +25,11 @@ public class CursomcApplication implements CommandLineRunner {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
+	@Autowired
+	private EstadoRepository estadoRepository;
 	
-	
+	@Autowired
+	private CidadeRepository cidadeRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -66,6 +71,10 @@ public class CursomcApplication implements CommandLineRunner {
 	
 		est1.getCidades().addAll(Arrays.asList(c1));
 		est2.getCidades().addAll(Arrays.asList(c2,c3));
+	
+		estadoRepository.saveAll(Arrays.asList(est1,est2));
+		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
+	
 	}
 
 }
