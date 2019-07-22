@@ -11,6 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.everis.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -23,9 +24,11 @@ public abstract class  Pagamento implements Serializable {
 	private Integer id;
 	private Integer estado;
 
+	
 	@OneToOne
 	@JoinColumn(name="pedido_id") //Faz com que o Pagamento herde o mesmo Id do Pedido
 	@MapsId
+	@JsonBackReference
 	private Pedido pedido;
 
 	public Pagamento() {
