@@ -15,8 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.everis.cursomc.domain.enums.TipoCliente;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cliente implements Serializable {
@@ -33,7 +32,7 @@ public class Cliente implements Serializable {
 	private Integer tipo;//1) Usado de forma a extrair simplesmente o codigo do TipoCliente
 
 
-	@JsonManagedReference //Evita a serializaçao ciclica do JSON. O cliente serializa os seus endereçoes, mas os enderecos nao serializam o seu cliente
+	
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 
@@ -42,7 +41,7 @@ public class Cliente implements Serializable {
 	private Set<String> telefones = new HashSet<>();
 
 	@OneToMany(mappedBy="cliente")
-	@JsonBackReference//Os pedidos de um cliente não são serializados
+	@JsonIgnore //Evita a serializaçao ciclica do JSON. 
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	

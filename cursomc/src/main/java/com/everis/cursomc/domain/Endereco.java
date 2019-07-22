@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -30,7 +30,7 @@ public class Endereco implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
-	@JsonBackReference //Evita que endereço serialize o cliente. Apenas o inverso é possivel. Evita referenciação ciclica.
+	@JsonIgnore //Evita que endereço serialize o cliente. Apenas o inverso é possivel. Evita referenciação ciclica.
 	private Cliente cliente;
 
 	@ManyToOne
