@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.everis.cursomc.services.exceptions.DataIntegrityNotFoundException;
 import com.everis.cursomc.services.exceptions.ObjectNotFoundEception;
 
 @ControllerAdvice
@@ -23,5 +24,11 @@ public class ResourceExceptionHandler {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 		}
 
-
+		@ExceptionHandler(DataIntegrityNotFoundException.class)//Tratador de excepçoes da classe ObjectNotFound
+		public ResponseEntity<StandardError> dataIntegrity (DataIntegrityNotFoundException e,HttpServletRequest request) {
+			
+			StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+		}
 }
