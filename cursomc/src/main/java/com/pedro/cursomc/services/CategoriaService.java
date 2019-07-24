@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.pedro.cursomc.domain.Categoria;
+import com.pedro.cursomc.dto.CategoriaDTO;
 import com.pedro.cursomc.repositories.CategoriaRepository;
 import com.pedro.cursomc.services.exceptions.DataIntegrityNotFoundException;
 import com.pedro.cursomc.services.exceptions.ObjectNotFoundEception;
@@ -68,5 +69,11 @@ public class CategoriaService {
 		
 		return repo.findAll(pageRequest);
 	
+	}
+
+
+	//Método responsavel por transformar um objecto dto em objecto normal
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
 	}
 }
